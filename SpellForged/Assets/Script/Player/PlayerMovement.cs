@@ -17,7 +17,9 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        game_input.OnJumpAction += GameInputOnJumpAction;
     }
+
 
     private void Update()
     {
@@ -37,10 +39,18 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(transform.TransformDirection(movement_direction) * (speed * Time.deltaTime));
 
         velocity.y += gravity * Time.deltaTime;
-        if (is_grounded)
+        if (is_grounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
         controller.Move(velocity* Time.deltaTime);
+    }
+    private void GameInputOnJumpAction(object sender, System.EventArgs e)
+    {
+        Debug.Log("pressed");
+        if(is_grounded)
+        {
+            velocity.y = Mathf.Sqrt(jump_height * -3f - gravity);
+        }
     }
 }
