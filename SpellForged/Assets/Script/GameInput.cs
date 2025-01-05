@@ -6,9 +6,11 @@ using UnityEngine;
 
 public class GameInput : MonoBehaviour
 {
-    private PlayerInputActions player_input_actions;
+    public PlayerInputActions player_input_actions;
+
     public event EventHandler OnJumpAction;
-    
+    public event EventHandler OnShootAction;
+
 
     private void Awake()
     {
@@ -16,6 +18,12 @@ public class GameInput : MonoBehaviour
         player_input_actions.Player.Enable();
 
         player_input_actions.Player.Jump.performed += jump_performed;
+        player_input_actions.Player.Shoot.performed += shoot_performed;
+    }
+
+    private void shoot_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnShootAction?.Invoke(this, EventArgs.Empty);
     }
 
     private void jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)

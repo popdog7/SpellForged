@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private void GameInputOnJumpAction(object sender, System.EventArgs e)
     {
-        Debug.Log("pressed");
         if(is_grounded)
         {
             velocity.y = Mathf.Sqrt(jump_height * -3f - gravity);
