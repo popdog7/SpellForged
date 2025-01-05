@@ -5,8 +5,7 @@ using UnityEngine;
 public class PlayerCastSpell : MonoBehaviour
 {
     [SerializeField] private GameInput game_input;
-    [SerializeField] private ICastingType cast_type;
-
+    [SerializeField] private BaseCastType cast_type;
     [SerializeField] private Transform cast_origin;
 
     private void Awake()
@@ -32,7 +31,7 @@ public class PlayerCastSpell : MonoBehaviour
         return true;
     }
 
-    public void SetCastType(ICastingType type)
+    public void SetCastType(BaseCastType type)
     {
         cast_type = type;
     }

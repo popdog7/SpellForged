@@ -1,9 +1,11 @@
 fileFormatVersion: 2
-guid: fe68a93e52725c04db534ddccd3fdc27
+guid: b71cfba263d08194dba92c2b1498d120
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - spell_prefab: {fileID: 8184390911314517803, guid: e7905019de5319548bdc901d52c20233,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
