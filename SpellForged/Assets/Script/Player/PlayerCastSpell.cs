@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerCastSpell : MonoBehaviour
 {
     [SerializeField] private GameInput game_input;
-    [SerializeField] private BaseCastType cast_type;
     [SerializeField] private Transform cast_origin;
+
+    [SerializeField] private BaseCastType cast_type;
+    [SerializeField] private AttributeModifierSO modifier;
 
     private void Awake()
     {
@@ -17,6 +19,7 @@ public class PlayerCastSpell : MonoBehaviour
     {
         if(CheckSpellFullyCrafted())
         {
+            cast_type.setupSpellStats(modifier);
             cast_type.CommenceSpellCasting(cast_origin);
         }
     }

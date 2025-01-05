@@ -324,8 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71cfba263d08194dba92c2b1498d120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spell_prefab: {fileID: 8184390911314517803, guid: e7905019de5319548bdc901d52c20233,
-    type: 3}
+  cast_base_data: {fileID: 11400000, guid: a17e74c129e160c47bde3d40dc6c23d4, type: 2}
 --- !u!4 &148466633
 Transform:
   m_ObjectHideFlags: 0
@@ -1534,8 +1533,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game_input: {fileID: 370240919}
-  cast_type: {fileID: 148466632}
   cast_origin: {fileID: 313427718}
+  cast_type: {fileID: 148466632}
+  modifier: {fileID: 11400000, guid: fa7095146a1309945aa4cab302a4d9e8, type: 2}
 --- !u!1 &1770799375
 GameObject:
   m_ObjectHideFlags: 0
