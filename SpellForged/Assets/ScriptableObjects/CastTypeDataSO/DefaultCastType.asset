@@ -17,4 +17,4 @@ MonoBehaviour:
   damage: 1
   range: 1
   cooldown: 1
-  crit_chance: 1
+  crit_chance: 0.05

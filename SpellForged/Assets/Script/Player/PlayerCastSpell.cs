@@ -13,13 +13,16 @@ public class PlayerCastSpell : MonoBehaviour
     private void Awake()
     {
         game_input.OnShootAction += GameInputOnShootAction;
+        if (CheckSpellFullyCrafted())
+        {
+            cast_type.setupSpellStats(modifier);
+        }
     }
 
     private void GameInputOnShootAction(object sender, System.EventArgs e)
     {
         if(CheckSpellFullyCrafted())
         {
-            cast_type.setupSpellStats(modifier);
             cast_type.CommenceSpellCasting(cast_origin);
         }
     }
@@ -30,6 +33,10 @@ public class PlayerCastSpell : MonoBehaviour
         {
             Debug.Log("Need Type Rune");
         }
+        else if (modifier == null)
+        {
+            Debug.Log("Need Modifier Rune");
+        }
 
         return true;
     }
@@ -37,5 +44,12 @@ public class PlayerCastSpell : MonoBehaviour
     public void SetCastType(BaseCastType type)
     {
         cast_type = type;
+        cast_type.setupSpellStats(modifier);
+    }
+
+    public void SetAttributeModifier(AttributeModifierSO mod)
+    {
+        modifier = mod;
+        cast_type.setupSpellStats(modifier);
     }
 }
