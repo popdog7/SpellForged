@@ -7,7 +7,7 @@ using UnityEngine;
 public class AttributeModifierSO : ScriptableObject
 {
     public float damage;
-    public float range;
+    public float spread;
     public float cooldown;
     public float crit_chance;
 }

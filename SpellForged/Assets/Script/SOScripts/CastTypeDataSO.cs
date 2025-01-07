@@ -7,7 +7,7 @@ public class CastTypeDataSO : ScriptableObject
 {
     public Transform spell_prefab;
     public float damage;
-    public float range;
+    public float spread;
     public float cooldown;
     public float crit_chance;
 }

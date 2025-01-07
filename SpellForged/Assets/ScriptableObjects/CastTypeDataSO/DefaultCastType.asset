@@ -15,6 +15,6 @@ MonoBehaviour:
   spell_prefab: {fileID: 8184390911314517803, guid: e7905019de5319548bdc901d52c20233,
     type: 3}
   damage: 1
-  range: 1
+  range: 0.01
   cooldown: 1
   crit_chance: 0.05
