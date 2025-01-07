@@ -10,21 +10,34 @@ public class PlayerCastSpell : MonoBehaviour
     [SerializeField] private BaseCastType cast_type;
     [SerializeField] private AttributeModifierSO modifier;
 
+    private bool can_shoot = false;
+
     private void Awake()
     {
-        game_input.OnShootAction += GameInputOnShootAction;
+        game_input.OnShootActionStart += GameInputOnShootActionStart;
+        game_input.OnShootActionEnd += GameInputOnShootActionEnd;
         if (CheckSpellFullyCrafted())
         {
             cast_type.setupSpellStats(modifier);
         }
     }
 
-    private void GameInputOnShootAction(object sender, System.EventArgs e)
+    private void Update()
     {
-        if(CheckSpellFullyCrafted())
+        if (CheckSpellFullyCrafted() && can_shoot)
         {
             cast_type.CommenceSpellCasting(cast_origin);
         }
+    }
+
+    private void GameInputOnShootActionEnd(object sender, System.EventArgs e)
+    {
+        can_shoot = false;
+    }
+
+    private void GameInputOnShootActionStart(object sender, System.EventArgs e)
+    {
+        can_shoot = true;
     }
 
     private bool CheckSpellFullyCrafted()

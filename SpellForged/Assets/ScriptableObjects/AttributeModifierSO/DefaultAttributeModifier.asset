@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DefaultAttributeModifier
   m_EditorClassIdentifier: 
   damage: 1
-  range: 1
+  spread: 1
   cooldown: 1
   crit_chance: 1
