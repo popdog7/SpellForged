@@ -9,7 +9,8 @@ public class GameInput : MonoBehaviour
     public PlayerInputActions player_input_actions;
 
     public event EventHandler OnJumpAction;
-    public event EventHandler OnShootAction;
+    public event EventHandler OnShootActionStart;
+    public event EventHandler OnShootActionEnd;
 
 
     private void Awake()
@@ -19,11 +20,17 @@ public class GameInput : MonoBehaviour
 
         player_input_actions.Player.Jump.performed += jump_performed;
         player_input_actions.Player.Shoot.performed += shoot_performed;
+        player_input_actions.Player.Shoot.canceled += Shoot_canceled;
+    }
+
+    private void Shoot_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnShootActionEnd?.Invoke(this, EventArgs.Empty);
     }
 
     private void shoot_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        OnShootAction?.Invoke(this, EventArgs.Empty);
+        OnShootActionStart?.Invoke(this, EventArgs.Empty);
     }
 
     private void jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)

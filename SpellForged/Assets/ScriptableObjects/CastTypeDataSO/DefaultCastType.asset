@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42432bea873316e48a4cc11b40ee70cc, type: 3}
+  m_Name: DefaultCastType
+  m_EditorClassIdentifier: 
+  spell_prefab: {fileID: 8184390911314517803, guid: e7905019de5319548bdc901d52c20233,
+    type: 3}
+  damage: 1
+  spread: 0.01
+  cooldown: 1
+  crit_chance: 0.05
