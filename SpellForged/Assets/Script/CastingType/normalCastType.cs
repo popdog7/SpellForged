@@ -12,7 +12,7 @@ public class normalCastType : BaseCastType
 
             Transform spell_transform = Instantiate(cast_base_data.spell_prefab, cast_location.position, cast_location.rotation);
             spell_transform.GetComponent<Rigidbody>().velocity = determineSpray(cast_location.forward) * 10f;
-            spell_transform.GetComponent<BasicSpell>().setupProjectile(damage_adjusted);
+            spell_transform.GetComponent<BasicProjectile>().setupProjectile(final_damage, elemental_type);
             
             cooldown_timer = 0;
         }

@@ -9,6 +9,7 @@ public class PlayerCastSpell : MonoBehaviour
 
     [SerializeField] private BaseCastType cast_type;
     [SerializeField] private AttributeModifierSO modifier;
+    [SerializeField] private ElementalTypeSO elemental_type;
 
     private bool can_shoot = false;
 
@@ -18,7 +19,7 @@ public class PlayerCastSpell : MonoBehaviour
         game_input.OnShootActionEnd += GameInputOnShootActionEnd;
         if (CheckSpellFullyCrafted())
         {
-            cast_type.setupSpellStats(modifier);
+            cast_type.setupSpellStats(modifier, elemental_type);
         }
     }
 
@@ -54,15 +55,21 @@ public class PlayerCastSpell : MonoBehaviour
         return true;
     }
 
-    public void SetCastType(BaseCastType type)
+    public void setCastType(BaseCastType type)
     {
         cast_type = type;
-        cast_type.setupSpellStats(modifier);
+        cast_type.setupSpellStats(modifier, elemental_type);
     }
 
-    public void SetAttributeModifier(AttributeModifierSO mod)
+    public void setAttributeModifier(AttributeModifierSO mod)
     {
         modifier = mod;
-        cast_type.setupSpellStats(modifier);
+        cast_type.setupSpellStats(modifier, elemental_type);
+    }
+
+    public void setElementalType(ElementalTypeSO element)
+    {
+        elemental_type = element;
+        cast_type.setupSpellStats(modifier, elemental_type);
     }
 }
