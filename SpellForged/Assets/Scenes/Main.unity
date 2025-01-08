@@ -1601,6 +1601,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1770799377}
   - component: {fileID: 1770799376}
+  - component: {fileID: 1770799378}
   m_Layer: 0
   m_Name: Target
   m_TagString: Enemy
@@ -1645,6 +1646,19 @@ Transform:
   - {fileID: 1483332401}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1770799378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770799375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b7dabe16a024942b2248a41a06f86f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max_health: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

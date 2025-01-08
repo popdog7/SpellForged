@@ -55,6 +55,13 @@ public class BasicProjectile : MonoBehaviour
         Debug.Log(transform.rotation);
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            BaseHealth enemy_health = collision.gameObject.GetComponent<BaseHealth>();
+            enemy_health.damageHealth(damage);
+            if (element_data.element_id != 0)
+            {
+                enemy_health.increaseElementalPercentage(element_data.element_id);
+            }
+
             Debug.Log("Hit: " + collision.gameObject.name + ", Damage: " + damage);
         }
 
