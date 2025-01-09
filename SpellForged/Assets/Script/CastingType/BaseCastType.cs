@@ -14,10 +14,10 @@ public abstract class BaseCastType : MonoBehaviour
     protected float cooldown_adjusted = 0;
     protected float crit_chance_adjusted = 0;
 
-
+    protected float projectile_speed = 10f;
     protected float cooldown_timer;
 
-    private void Update()
+    protected virtual void Update()
     {
         if(!isCooldownOver())
         {
