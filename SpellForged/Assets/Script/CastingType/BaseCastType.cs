@@ -6,11 +6,14 @@ using UnityEngine;
 public abstract class BaseCastType : MonoBehaviour
 {
     [SerializeField] protected CastTypeDataSO cast_base_data;
+    protected ElementalTypeSO elemental_type;
 
+    protected float final_damage = 0;
     protected float damage_adjusted = 0;
     protected float spread_adjusted = 0;
     protected float cooldown_adjusted = 0;
     protected float crit_chance_adjusted = 0;
+
 
     protected float cooldown_timer;
 
@@ -19,16 +22,18 @@ public abstract class BaseCastType : MonoBehaviour
         if(!isCooldownOver())
         {
             cooldown_timer += Time.deltaTime;
-            Debug.Log("Cooldown Passed: " + cooldown_timer + ", CoolDown Time: " + cooldown_adjusted);
+            //Debug.Log("Cooldown Passed: " + cooldown_timer + ", CoolDown Time: " + cooldown_adjusted);
         }
     }
 
-    public void setupSpellStats(AttributeModifierSO modifier)
+    public void setupSpellStats(AttributeModifierSO modifier, ElementalTypeSO element_data)
     {
         damage_adjusted = convertToTwoDecimal(cast_base_data.damage * modifier.damage);
         spread_adjusted = convertToTwoDecimal(cast_base_data.spread * modifier.spread);
         cooldown_adjusted = convertToTwoDecimal(cast_base_data.cooldown * modifier.cooldown);
         crit_chance_adjusted = convertToTwoDecimal(cast_base_data.crit_chance * modifier.crit_chance);
+
+        elemental_type = element_data;
     }
 
     public void determineCriticalDamage()
@@ -37,7 +42,12 @@ public abstract class BaseCastType : MonoBehaviour
 
         if(chance <= crit_chance_adjusted)
         {
-            damage_adjusted *= 2;
+            final_damage = 2 * damage_adjusted;
+            Debug.Log("crit");
+        }
+        else
+        {
+            final_damage = damage_adjusted;
         }
     }
 
