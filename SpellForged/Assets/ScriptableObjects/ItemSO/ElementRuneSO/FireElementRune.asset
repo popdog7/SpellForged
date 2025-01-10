@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e72d90093f1c741878f57068e7aaf3, type: 3}
   m_Name: FireElementRune
   m_EditorClassIdentifier: 
-  inventory_icon: {fileID: 317319622557168097, guid: 9f5d107eb7974a046ae552c114cc285d,
-    type: 3}
+  id: 2
+  inventory_icon: {fileID: 21300000, guid: 496d4f93722620643b51ad61bc637ae1, type: 3}
   type: 1
   description: 
   first_color: {r: 0.9339623, g: 0.3301789, b: 0.13656995, a: 1}

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde5369ad13e49c4d91ee465217867fb, type: 3}
   m_Name: DefaultCastRune
   m_EditorClassIdentifier: 
-  inventory_icon: {fileID: 1137080744213530016, guid: 256727946de287a46aff78a77278f4b3,
-    type: 3}
+  id: 0
+  inventory_icon: {fileID: 21300000, guid: 496d4f93722620643b51ad61bc637ae1, type: 3}
   type: 0
   description: 
   spell_prefab: {fileID: 8184390911314517803, guid: e7905019de5319548bdc901d52c20233,

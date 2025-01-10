@@ -10,7 +10,7 @@ public class RuneInteractable : Interactable
     protected override void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
-        player_inventory.inventory.AddItem(item, 1);
+        player_inventory.inventory.AddItem(new item(item), 1);
         Destroy(gameObject);
     }
 }

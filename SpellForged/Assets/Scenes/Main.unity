@@ -1714,10 +1714,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 6b6e085d9af7f2f4689a82350469ca37, type: 2}
+  inventory_prefab: {fileID: 8908062606678526760, guid: e8f4ffdc7d78845459804898d0a60a3f,
+    type: 3}
   x_start: -170
   y_start: 300
-  x_space_between_item: 64
-  y_space_between_item: 64
+  x_space_between_item: 96
+  y_space_between_item: 96
   num_columns: 6
 --- !u!114 &1107954459
 MonoBehaviour:

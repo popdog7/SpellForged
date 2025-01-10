@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e72d90093f1c741878f57068e7aaf3, type: 3}
   m_Name: ArcaneElementRune
   m_EditorClassIdentifier: 
-  inventory_icon: {fileID: 234786840620519339, guid: d85d1487d86139042bf8512001742035,
-    type: 3}
+  id: 1
+  inventory_icon: {fileID: 21300000, guid: 496d4f93722620643b51ad61bc637ae1, type: 3}
   type: 1
   description: 
   first_color: {r: 0.68301034, g: 0.39288896, b: 0.764151, a: 1}

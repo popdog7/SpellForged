@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e72d90093f1c741878f57068e7aaf3, type: 3}
   m_Name: IceElementRune
   m_EditorClassIdentifier: 
-  inventory_icon: {fileID: 5500465617527533034, guid: ec1b6f0c4eb88aa4a8247284e124aa42,
-    type: 3}
+  id: 0
+  inventory_icon: {fileID: 21300000, guid: 496d4f93722620643b51ad61bc637ae1, type: 3}
   type: 1
   description: 
   first_color: {r: 0.25618547, g: 0.7527558, b: 0.9528302, a: 1}
