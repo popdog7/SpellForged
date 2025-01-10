@@ -11,4 +11,18 @@ public class PlayerInventory : MonoBehaviour
         inventory.container.Clear();
     }
 
+    //TEMP TILL I IMPLEMENT THE REAL EVENT FROM GAME INPUT
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            inventory.Save();
+        }
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            inventory.Load();
+        }
+    }
+
 }
