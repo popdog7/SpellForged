@@ -12,6 +12,6 @@ public class ModifierRuneSO : ItemSO
 
     public void Awake()
     {
-        type = ItemType.element_rune;
+        type = ItemType.modifier_rune;
     }
 }

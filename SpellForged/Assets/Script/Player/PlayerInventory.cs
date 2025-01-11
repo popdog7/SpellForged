@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     public InventorySO inventory;
+    public mouseItem mouse_item = new mouseItem();
 
     private void OnApplicationQuit()
     {

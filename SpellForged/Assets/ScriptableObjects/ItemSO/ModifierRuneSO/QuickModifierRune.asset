@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5
   inventory_icon: {fileID: 21300000, guid: 82b8204ec0cd68d45be58e5549d0da9a, type: 3}
-  type: 1
+  type: 2
   description: 
   damage: 0.5
   spread: 1

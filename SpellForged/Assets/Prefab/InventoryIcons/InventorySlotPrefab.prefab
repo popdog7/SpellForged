@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 2463947203190909659}
   - component: {fileID: 3471780050725383790}
   m_Layer: 5
-  m_Name: InventoryPrefab
+  m_Name: InventorySlotPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

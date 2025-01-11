@@ -83,7 +83,7 @@ public class InventorySO : ScriptableObject
     [ContextMenu("Clear")]
     public void clear()
     {
-        container = new Inventory();
+        container.clear();
     }
 }
 
@@ -91,6 +91,8 @@ public class InventorySO : ScriptableObject
 [System.Serializable]
 public class InventorySlot
 {
+    public ItemType[] allowed_items = new ItemType[0];
+    public UserInterface parent_interface;
     public int id;
     public item item;
     public int amount;
@@ -120,10 +122,33 @@ public class InventorySlot
         item = _item;
         amount = _amount;
     }
+
+    public bool canPlaceInSlot(ItemSO _item)
+    {
+        if(allowed_items.Length == 0) return true;
+
+        for (int i = 0; i < allowed_items.Length; i++)
+        {
+            if(_item.type == allowed_items[i])
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
 
 [System.Serializable]
 public class Inventory
 {
     public InventorySlot[] items = new InventorySlot[24];
+
+    public void clear()
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            items[i].setSlot(new item(), 0, -1);
+        }
+    }
 }

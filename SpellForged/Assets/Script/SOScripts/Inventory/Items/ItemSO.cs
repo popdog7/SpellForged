@@ -24,6 +24,13 @@ public class item
 {
     public string name;
     public int id;
+
+    public item()
+    {
+        name = "";
+        id = -1;
+    }
+
     public item(ItemSO item)
     {
         name = item.name;
