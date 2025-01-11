@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireElementRune
   m_EditorClassIdentifier: 
   id: 2
-  inventory_icon: {fileID: 21300000, guid: 496d4f93722620643b51ad61bc637ae1, type: 3}
+  inventory_icon: {fileID: 21300000, guid: 82b8204ec0cd68d45be58e5549d0da9a, type: 3}
   type: 1
   description: 
   first_color: {r: 0.9339623, g: 0.3301789, b: 0.13656995, a: 1}

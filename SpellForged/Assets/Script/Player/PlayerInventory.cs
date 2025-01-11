@@ -8,7 +8,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        inventory.container.items.Clear();
+        inventory.container.items = new InventorySlot[24];
     }
 
     //TEMP TILL I IMPLEMENT THE REAL EVENT FROM GAME INPUT

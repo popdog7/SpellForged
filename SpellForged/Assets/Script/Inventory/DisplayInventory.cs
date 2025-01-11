@@ -4,9 +4,15 @@ using System.Xml.Serialization;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
+using Unity.VisualScripting;
+
 
 public class DisplayInventory : MonoBehaviour
 {
+    public mouseItem mouse_item = new mouseItem();
+
     [SerializeField] private InventorySO inventory;
     [SerializeField] private GameObject inventory_prefab;
 
@@ -17,57 +23,128 @@ public class DisplayInventory : MonoBehaviour
     [SerializeField] private int y_space_between_item;
     [SerializeField] private int num_columns;
 
-    Dictionary<InventorySlot, GameObject> items_displayed = new Dictionary<InventorySlot, GameObject> ();
+    Dictionary<GameObject, InventorySlot> items_displayed = new Dictionary<GameObject, InventorySlot> ();
 
     
     private void Start()
     {
-        createDisplay();
+        createInventoryUISlots();
     }
 
     private void Update()
     {
-        UpdateDisplay();
+        updateInventorySlots();
     }
 
-    public void UpdateDisplay()
+    public void updateInventorySlots()
     {
-        for (int i = 0; i < inventory.container.items.Count; i++)
+        foreach(KeyValuePair<GameObject, InventorySlot> slot in items_displayed)
         {
-            InventorySlot slot = inventory.container.items[i];
-
-            if (items_displayed.ContainsKey(slot))
+            if(slot.Value.id >= 0)
             {
-                items_displayed[slot].GetComponentInChildren<TextMeshProUGUI>().text = slot.amount.ToString("n0");
+                slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = inventory.database.get_item[slot.Value.item.id].inventory_icon;
+                slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
+                slot.Key.transform.GetComponentInChildren<TextMeshProUGUI>().text = slot.Value.amount == 1 ? "" : slot.Value.amount.ToString();
             }
             else
             {
-                var obj = Instantiate(inventory_prefab, Vector3.zero, Quaternion.identity, transform);
-                obj.transform.GetChild(0).GetComponentInChildren<Image>().sprite = inventory.database.get_item[slot.item.id].inventory_icon;
-                obj.GetComponent<RectTransform>().localPosition = getPosition(i);
-                obj.GetComponentInChildren<TextMeshProUGUI>().text = slot.amount.ToString("n0");
-                items_displayed.Add(slot, obj);
+                slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
+                slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
+                slot.Key.transform.GetComponentInChildren<TextMeshProUGUI>().text = "";
             }
         }
     }
 
-    public void createDisplay()
+    public void createInventoryUISlots()
     {
-        for (int i = 0; i < inventory.container.items.Count; i++)
+        items_displayed = new Dictionary<GameObject, InventorySlot>();
+        for (int i = 0; i < inventory.container.items.Length; i++)
         {
-            InventorySlot slot = inventory.container.items[i];
-
             var obj = Instantiate(inventory_prefab, Vector3.zero, Quaternion.identity, transform);
-            obj.transform.GetChild(0).GetComponentInChildren<Image>().sprite = inventory.database.get_item[slot.item.id].inventory_icon;
             obj.GetComponent<RectTransform>().localPosition = getPosition(i);
-            obj.GetComponentInChildren<TextMeshProUGUI>().text = slot.amount.ToString("n0");
-            items_displayed.Add(slot, obj);
+
+            addEvent(obj, EventTriggerType.PointerEnter, delegate { onEnter(obj); });
+            addEvent(obj, EventTriggerType.PointerExit, delegate { onExit(obj); });
+            addEvent(obj, EventTriggerType.BeginDrag, delegate { onDragStart(obj); });
+            addEvent(obj, EventTriggerType.EndDrag, delegate { onDragEnd(obj); });
+            addEvent(obj, EventTriggerType.Drag, delegate { onDrag(obj); });
+
+            items_displayed.Add(obj, inventory.container.items[i]);
         }
     }
 
     public Vector3 getPosition(int i)
     {
-        return new Vector3(x_start + (x_space_between_item * (i % num_columns)), y_start + (y_space_between_item * (i / num_columns)), 0f);
+        return new Vector3(x_start + (x_space_between_item * (i % num_columns)), y_start + (-y_space_between_item * (i / num_columns)), 0f);
     }
     
+    private void addEvent(GameObject obj, EventTriggerType type, UnityAction<BaseEventData> action)
+    {
+        EventTrigger trigger = obj.GetComponent<EventTrigger>();
+        var evenTrigger = new EventTrigger.Entry();
+        evenTrigger.eventID = type;
+        evenTrigger.callback.AddListener(action);
+        trigger.triggers.Add(evenTrigger);
+    }
+
+    public void onEnter(GameObject obj)
+    {
+        mouse_item.hover_obj = obj;
+        if (items_displayed.ContainsKey(obj))
+            mouse_item.hover_item = items_displayed[obj];
+    }
+
+    public void onExit(GameObject obj)
+    {
+        mouse_item.hover_obj = null;
+        mouse_item.hover_item = null;
+    }
+
+    public void onDragStart(GameObject obj)
+    {
+        var mouse_object = new GameObject();
+        var rect_transform = mouse_object.AddComponent<RectTransform>();
+        rect_transform.sizeDelta = new Vector2(50, 50);
+        mouse_object.transform.SetParent(transform.parent);
+        if (items_displayed[obj].id >= 0)
+        {
+            var img = mouse_object.AddComponent<Image>();
+            img.sprite = inventory.database.get_item[items_displayed[obj].id].inventory_icon;
+            img.raycastTarget = false;
+        }
+
+        mouse_item.obj = mouse_object;
+        mouse_item.item = items_displayed[obj];
+    }
+
+    public void onDragEnd(GameObject obj)
+    {
+        if(mouse_item.hover_obj)
+        {
+            inventory.moveItem(items_displayed[obj], items_displayed[mouse_item.hover_obj]);
+        }
+        else
+        {
+            inventory.RemoveItem(items_displayed[obj].item);
+        }
+        Destroy(mouse_item.obj);
+        mouse_item.item = null;
+    }
+
+    public void onDrag(GameObject obj)
+    {
+        if(mouse_item.obj != null)
+        {
+            mouse_item.obj.GetComponent<RectTransform>().position = Input.mousePosition;
+        }
+    }
+}
+
+public class mouseItem
+{
+    public GameObject obj;
+    public InventorySlot item;
+
+    public InventorySlot hover_item;
+    public GameObject hover_obj;
 }

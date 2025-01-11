@@ -13,19 +13,49 @@ public class InventorySO : ScriptableObject
     public ItemDatabaseSO database;
     public Inventory container;
 
+    
     public void AddItem(item _item, int _amount)
     {
-        for( int i =0; i < container.items.Count; i++)
+        for( int i =0; i < container.items.Length; i++)
         {
-            if (container.items[i].item.id == _item.id)
+            if (container.items[i].id == _item.id)
             {
                 container.items[i].AddAmount(_amount);
                 return;
             }
         }
+        setEmptySlot(_item, _amount);
+    }
 
-        container.items.Add(new InventorySlot(_item, _amount, _item.id));
+    public InventorySlot setEmptySlot(item _item, int _amount)
+    {
+        for (int i = 0; i < container.items.Length; i++)
+        {
+            if (container.items[i].id <= -1)
+            {
+                container.items[i].setSlot(_item, _amount, _item.id);
+                return container.items[i];
+            }
+        }
+        return null;
+    }
+    
+    public void moveItem(InventorySlot item_1, InventorySlot item_2)
+    {
+        InventorySlot temp = new InventorySlot(item_2.item, item_2.amount, item_2.id);
+        item_2.setSlot(item_1.item, item_1.amount, item_1.id);
+        item_1.setSlot(temp.item, temp.amount, temp.id);
+    }
 
+    public void RemoveItem(item _item)
+    {
+        for (int i = 0; i < container.items.Length; i++)
+        {
+            if (container.items[i].item == _item)
+            {
+                container.items[i].setSlot(null, 0, -1);
+            }
+        }
     }
 
     [ContextMenu("Save")]
@@ -72,14 +102,28 @@ public class InventorySlot
         amount = _amount;
     }
 
+    public InventorySlot()
+    {
+        id = -1;
+        item = null;
+        amount = 0;
+    }
+
     public void AddAmount(int value)
     {
         amount += value;
+    }
+
+    public void setSlot(item _item, int _amount, int _id)
+    {
+        id = _id;
+        item = _item;
+        amount = _amount;
     }
 }
 
 [System.Serializable]
 public class Inventory
 {
-    public List<InventorySlot> items = new List<InventorySlot>();
+    public InventorySlot[] items = new InventorySlot[24];
 }

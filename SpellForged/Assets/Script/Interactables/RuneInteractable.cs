@@ -1,11 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class RuneInteractable : Interactable
+public class RuneInteractable : Interactable, ISerializationCallbackReceiver
 {
     [SerializeField] private ItemSO item;
     [SerializeField] private PlayerInventory player_inventory;
+
+    public void OnAfterDeserialize()
+    {
+    }
+
+    public void OnBeforeSerialize()
+    {
+        GetComponentInChildren<SpriteRenderer>().sprite = item.inventory_icon;
+        EditorUtility.SetDirty(GetComponentInChildren<SpriteRenderer>());
+    }
 
     protected override void Interact()
     {
