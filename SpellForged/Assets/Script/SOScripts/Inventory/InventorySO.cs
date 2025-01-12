@@ -13,38 +13,78 @@ public class InventorySO : ScriptableObject
     public ItemDatabaseSO database;
     public Inventory container;
 
-    
-    public void AddItem(item _item, int _amount)
+    public int EmptySlotCount
     {
-        for( int i =0; i < container.items.Length; i++)
+        get
         {
-            if (container.items[i].id == _item.id)
+            int counter = 0;
+            for (int i = 0; i < container.items.Length; i++)
             {
-                container.items[i].AddAmount(_amount);
-                return;
+                if (container.items[i].item.id <= -1)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+    }
+    
+    public bool AddItem(item _item, int _amount)
+    {
+        if(EmptySlotCount <= 0)
+        {
+            return false;
+        }
+
+        InventorySlot slot = findItemonInventory(_item);
+
+        if (!database.items[_item.id].stackable || slot == null)
+        {
+            setEmptySlot(_item, _amount);
+            return true;
+        }
+
+        slot.AddAmount(_amount);
+        return true;
+    }
+
+    public InventorySlot findItemonInventory(item _item)
+    {
+        for (int i = 0; i < container.items.Length; i++)
+        {
+            if (container.items[i].item.id == _item.id)
+            {
+                return container.items[i];
             }
         }
-        setEmptySlot(_item, _amount);
+
+        return null;
     }
 
     public InventorySlot setEmptySlot(item _item, int _amount)
     {
         for (int i = 0; i < container.items.Length; i++)
         {
-            if (container.items[i].id <= -1)
+            if (container.items[i].item.id <= -1)
             {
-                container.items[i].setSlot(_item, _amount, _item.id);
+                container.items[i].setSlot(_item, _amount);
                 return container.items[i];
             }
         }
         return null;
     }
     
-    public void moveItem(InventorySlot item_1, InventorySlot item_2)
+    public void swapItems(InventorySlot item_1, InventorySlot item_2)
     {
-        InventorySlot temp = new InventorySlot(item_2.item, item_2.amount, item_2.id);
-        item_2.setSlot(item_1.item, item_1.amount, item_1.id);
-        item_1.setSlot(temp.item, temp.amount, temp.id);
+
+        if (item_2.canPlaceInSlot(item_1.ItemSO) && item_1.canPlaceInSlot(item_2.ItemSO))
+        {
+            InventorySlot temp = new InventorySlot(item_2.item, item_2.amount);
+            item_2.setSlot(item_1.item, item_1.amount);
+            item_1.setSlot(temp.item, temp.amount);
+        }
+        
+        
     }
 
     public void RemoveItem(item _item)
@@ -53,7 +93,7 @@ public class InventorySO : ScriptableObject
         {
             if (container.items[i].item == _item)
             {
-                container.items[i].setSlot(null, 0, -1);
+                container.items[i].setSlot(null, 0);
             }
         }
     }
@@ -92,22 +132,31 @@ public class InventorySO : ScriptableObject
 public class InventorySlot
 {
     public ItemType[] allowed_items = new ItemType[0];
-    public UserInterface parent_interface;
-    public int id;
+    [System.NonSerialized] public UserInterface parent_interface;
     public item item;
     public int amount;
 
-    public InventorySlot(item _item, int _amount, int _id)
+    public ItemSO ItemSO
     {
-        id = _id;
+        get
+        {
+            if(item.id >= 0)
+            {
+                return parent_interface.inventory.database.items[item.id];
+            }
+            return null;
+        }
+    }
+
+    public InventorySlot(item _item, int _amount)
+    {
         item = _item;
         amount = _amount;
     }
 
     public InventorySlot()
     {
-        id = -1;
-        item = null;
+        item = new item();
         amount = 0;
     }
 
@@ -116,20 +165,25 @@ public class InventorySlot
         amount += value;
     }
 
-    public void setSlot(item _item, int _amount, int _id)
+    public void setSlot(item _item, int _amount)
     {
-        id = _id;
         item = _item;
         amount = _amount;
     }
 
-    public bool canPlaceInSlot(ItemSO _item)
+    public void removeItem()
     {
-        if(allowed_items.Length == 0) return true;
+        item = new item();
+        amount = 0;
+    }
+
+    public bool canPlaceInSlot(ItemSO _item_obj)
+    {
+        if (allowed_items.Length <= 0 || _item_obj == null || _item_obj.data.id < 0) return true;
 
         for (int i = 0; i < allowed_items.Length; i++)
         {
-            if(_item.type == allowed_items[i])
+            if(_item_obj.type == allowed_items[i])
             {
                 return true;
             }
@@ -148,7 +202,7 @@ public class Inventory
     {
         for (int i = 0; i < items.Length; i++)
         {
-            items[i].setSlot(new item(), 0, -1);
+            items[i].removeItem();
         }
     }
 }

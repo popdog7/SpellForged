@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     public InventorySO inventory;
-    public mouseItem mouse_item = new mouseItem();
+    public InventorySO equipment;
 
     private void OnApplicationQuit()
     {
-        inventory.container.items = new InventorySlot[24];
+        inventory.container.clear();
+        equipment.container.clear();
     }
 
     //TEMP TILL I IMPLEMENT THE REAL EVENT FROM GAME INPUT
@@ -18,11 +19,13 @@ public class PlayerInventory : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             inventory.Save();
+            equipment.Save();
         }
 
         if (Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             inventory.Load();
+            equipment.Load();
         }
     }
 

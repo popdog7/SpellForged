@@ -11,19 +11,20 @@ public enum ItemType
 
 public abstract class ItemSO : ScriptableObject
 {
-    public int id;
     public Sprite inventory_icon;
+    public bool stackable;
     public ItemType type;
 
     [TextArea(15,20)]
     public string description;
+    public item data = new item();
 }
 
 [System.Serializable]
 public class item
 {
     public string name;
-    public int id;
+    public int id = -1;
 
     public item()
     {
@@ -34,6 +35,6 @@ public class item
     public item(ItemSO item)
     {
         name = item.name;
-        id = item.id;
+        id = item.data.id;
     }
 }

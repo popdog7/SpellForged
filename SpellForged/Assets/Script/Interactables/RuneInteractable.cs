@@ -14,14 +14,19 @@ public class RuneInteractable : Interactable, ISerializationCallbackReceiver
 
     public void OnBeforeSerialize()
     {
+#if UNITY_EDITOR
         GetComponentInChildren<SpriteRenderer>().sprite = item.inventory_icon;
         EditorUtility.SetDirty(GetComponentInChildren<SpriteRenderer>());
+#endif
     }
 
     protected override void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
-        player_inventory.inventory.AddItem(new item(item), 1);
-        Destroy(gameObject);
+
+        if(player_inventory.inventory.AddItem(new item(item), 1))
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -12,48 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efffcda10b3719d4393bc07d25f69bf2, type: 3}
   m_Name: EquipmentInventory
   m_EditorClassIdentifier: 
-  save_path: 
+  save_path: /equipment.save
   database: {fileID: 11400000, guid: 3c8ffd4f85604cc488346a142b1513a6, type: 2}
   container:
     items:
     - allowed_items: 00000000
-      parent_interface: {fileID: 0}
-      id: 0
       item:
-        name: DefaultCastRune
-        id: 0
-      amount: 3
+        name: 
+        id: -1
+      amount: 0
     - allowed_items: 00000000
-      parent_interface: {fileID: 0}
-      id: -1
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 01000000
-      parent_interface: {fileID: 0}
-      id: 3
       item:
-        name: IceElementRune
-        id: 3
-      amount: 1
+        name: 
+        id: -1
+      amount: 0
     - allowed_items: 01000000
-      parent_interface: {fileID: 0}
-      id: 2
       item:
-        name: FireElementRune
-        id: 2
-      amount: 1
+        name: 
+        id: -1
+      amount: 0
     - allowed_items: 02000000
-      parent_interface: {fileID: 0}
-      id: 5
       item:
-        name: QuickModifierRune
-        id: 5
-      amount: 1
+        name: 
+        id: -1
+      amount: 0
     - allowed_items: 02000000
-      parent_interface: {fileID: 0}
-      id: -1
       item:
         name: 
         id: -1
