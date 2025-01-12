@@ -27,7 +27,7 @@ public class PlayerCastSpell : MonoBehaviour
     {
         if (CheckSpellFullyCrafted() && can_shoot)
         {
-            cast_type.CommenceSpellCasting(cast_origin);
+            //cast_type.CommenceSpellCasting(cast_origin);
         }
     }
 

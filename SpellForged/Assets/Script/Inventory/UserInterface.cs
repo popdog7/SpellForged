@@ -28,13 +28,6 @@ public abstract class UserInterface : MonoBehaviour
         addEvent(gameObject, EventTriggerType.PointerExit, delegate { onExitInterface(gameObject); });
     }
 
-    /*
-    private void Update()
-    {
-        slots_on_interface.updateSlotDisplay();
-    }
-    */
-
     public abstract void createInventoryUISlots();
 
     protected void addEvent(GameObject obj, EventTriggerType type, UnityAction<BaseEventData> action)
