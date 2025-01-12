@@ -15,7 +15,7 @@ MonoBehaviour:
   save_path: /equipment.save
   database: {fileID: 11400000, guid: 3c8ffd4f85604cc488346a142b1513a6, type: 2}
   container:
-    items:
+    item_slots:
     - allowed_items: 00000000
       item:
         name: 

@@ -11,7 +11,7 @@ public class StaticInterface : UserInterface
     {
         slots_on_interface = new Dictionary<GameObject, InventorySlot> ();
 
-        for (int i = 0; i < inventory.container.items.Length; i++)
+        for (int i = 0; i < inventory.get_slots.Length; i++)
         {
             var obj = slots[i];
 
@@ -21,7 +21,9 @@ public class StaticInterface : UserInterface
             addEvent(obj, EventTriggerType.EndDrag, delegate { onDragEnd(obj); });
             addEvent(obj, EventTriggerType.Drag, delegate { onDrag(obj); });
 
-            slots_on_interface.Add(obj, inventory.container.items[i]);
+            inventory.get_slots[i].slot = obj;
+
+            slots_on_interface.Add(obj, inventory.get_slots[i]);
         }
     }
 }

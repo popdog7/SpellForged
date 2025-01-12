@@ -5,6 +5,8 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEditor;
+using static UnityEditor.Progress;
+using System;
 
 [CreateAssetMenu(fileName = "Inventory", menuName = "Inventory System/Inventory")]
 public class InventorySO : ScriptableObject
@@ -12,15 +14,16 @@ public class InventorySO : ScriptableObject
     public string save_path;
     public ItemDatabaseSO database;
     public Inventory container;
+    public InventorySlot[] get_slots { get { return container.item_slots; } }
 
     public int EmptySlotCount
     {
         get
         {
             int counter = 0;
-            for (int i = 0; i < container.items.Length; i++)
+            for (int i = 0; i < get_slots.Length; i++)
             {
-                if (container.items[i].item.id <= -1)
+                if (get_slots[i].item.id <= -1)
                 {
                     counter++;
                 }
@@ -38,7 +41,7 @@ public class InventorySO : ScriptableObject
 
         InventorySlot slot = findItemonInventory(_item);
 
-        if (!database.items[_item.id].stackable || slot == null)
+        if (!database.item_objecs[_item.id].stackable || slot == null)
         {
             setEmptySlot(_item, _amount);
             return true;
@@ -50,11 +53,11 @@ public class InventorySO : ScriptableObject
 
     public InventorySlot findItemonInventory(item _item)
     {
-        for (int i = 0; i < container.items.Length; i++)
+        for (int i = 0; i < get_slots.Length; i++)
         {
-            if (container.items[i].item.id == _item.id)
+            if (get_slots[i].item.id == _item.id)
             {
-                return container.items[i];
+                return get_slots[i];
             }
         }
 
@@ -63,12 +66,12 @@ public class InventorySO : ScriptableObject
 
     public InventorySlot setEmptySlot(item _item, int _amount)
     {
-        for (int i = 0; i < container.items.Length; i++)
+        for (int i = 0; i < get_slots.Length; i++)
         {
-            if (container.items[i].item.id <= -1)
+            if (get_slots[i].item.id <= -1)
             {
-                container.items[i].setSlot(_item, _amount);
-                return container.items[i];
+                get_slots[i].setSlot(_item, _amount);
+                return get_slots[i];
             }
         }
         return null;
@@ -89,11 +92,11 @@ public class InventorySO : ScriptableObject
 
     public void RemoveItem(item _item)
     {
-        for (int i = 0; i < container.items.Length; i++)
+        for (int i = 0; i < get_slots.Length; i++)
         {
-            if (container.items[i].item == _item)
+            if (get_slots[i].item == _item)
             {
-                container.items[i].setSlot(null, 0);
+                get_slots[i].setSlot(null, 0);
             }
         }
     }
@@ -127,12 +130,19 @@ public class InventorySO : ScriptableObject
     }
 }
 
+public delegate void slotUpdated(InventorySlot _slot);
 
 [System.Serializable]
 public class InventorySlot
 {
     public ItemType[] allowed_items = new ItemType[0];
+
     [System.NonSerialized] public UserInterface parent_interface;
+    [System.NonSerialized] public GameObject slot;
+
+    [System.NonSerialized] public slotUpdated on_after_update;
+    [System.NonSerialized] public slotUpdated on_before_update;
+
     public item item;
     public int amount;
 
@@ -142,7 +152,7 @@ public class InventorySlot
         {
             if(item.id >= 0)
             {
-                return parent_interface.inventory.database.items[item.id];
+                return parent_interface.inventory.database.item_objecs[item.id];
             }
             return null;
         }
@@ -150,31 +160,32 @@ public class InventorySlot
 
     public InventorySlot(item _item, int _amount)
     {
-        item = _item;
-        amount = _amount;
+        setSlot(_item, _amount);
     }
 
     public InventorySlot()
     {
-        item = new item();
-        amount = 0;
+        setSlot(new item(), 0);
     }
 
     public void AddAmount(int value)
     {
-        amount += value;
-    }
-
-    public void setSlot(item _item, int _amount)
-    {
-        item = _item;
-        amount = _amount;
+        setSlot(item, amount += value);
     }
 
     public void removeItem()
     {
-        item = new item();
-        amount = 0;
+        setSlot(new item(), 0);
+    }
+
+    public void setSlot(item _item, int _amount)
+    {
+        on_before_update?.Invoke(this);
+
+        item = _item;
+        amount = _amount;
+
+        on_after_update?.Invoke(this);
     }
 
     public bool canPlaceInSlot(ItemSO _item_obj)
@@ -196,13 +207,13 @@ public class InventorySlot
 [System.Serializable]
 public class Inventory
 {
-    public InventorySlot[] items = new InventorySlot[24];
+    public InventorySlot[] item_slots = new InventorySlot[24];
 
     public void clear()
     {
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < item_slots.Length; i++)
         {
-            items[i].removeItem();
+            item_slots[i].removeItem();
         }
     }
 }

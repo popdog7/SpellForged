@@ -16,9 +16,10 @@ public abstract class UserInterface : MonoBehaviour
 
     private void Start()
     {
-        for(int i = 0; i < inventory.container.items.Length; i++)
+        for(int i = 0; i < inventory.get_slots.Length; i++)
         {
-            inventory.container.items[i].parent_interface = this;
+            inventory.get_slots[i].parent_interface = this;
+            inventory.get_slots[i].on_after_update += onSlotUpdate;
         }
 
         createInventoryUISlots();
@@ -27,10 +28,12 @@ public abstract class UserInterface : MonoBehaviour
         addEvent(gameObject, EventTriggerType.PointerExit, delegate { onExitInterface(gameObject); });
     }
 
+    /*
     private void Update()
     {
-        slots_on_interface.updateSlotDIsplay();
+        slots_on_interface.updateSlotDisplay();
     }
+    */
 
     public abstract void createInventoryUISlots();
 
@@ -108,6 +111,22 @@ public abstract class UserInterface : MonoBehaviour
     {
         mouseData.interface_mouse_is_over = null;
     }
+
+    private void onSlotUpdate(InventorySlot _slot)
+    {
+        if (_slot.item.id >= 0)
+        {
+            _slot.slot.transform.GetChild(0).GetComponentInChildren<Image>().sprite = _slot.ItemSO.inventory_icon;
+            _slot.slot.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
+            _slot.slot.transform.GetComponentInChildren<TextMeshProUGUI>().text = _slot.amount == 1 ? "" : _slot.amount.ToString();
+        }
+        else
+        {
+            _slot.slot.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
+            _slot.slot.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
+            _slot.slot.transform.GetComponentInChildren<TextMeshProUGUI>().text = "";
+        }
+    }
 }
 
 public static class mouseData
@@ -119,7 +138,7 @@ public static class mouseData
 
 public static class ExtensionMethods
 {
-    public static void updateSlotDIsplay(this Dictionary<GameObject, InventorySlot> _slots_on_interface)
+    public static void updateSlotDisplay(this Dictionary<GameObject, InventorySlot> _slots_on_interface)
     {
         foreach (KeyValuePair<GameObject, InventorySlot> slot in _slots_on_interface)
         {
