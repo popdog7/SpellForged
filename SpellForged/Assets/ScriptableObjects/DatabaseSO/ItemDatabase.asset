@@ -15,8 +15,8 @@ MonoBehaviour:
   item_objecs:
   - {fileID: 11400000, guid: 4742224b76df3ea45a9f87dcc7c277c4, type: 2}
   - {fileID: 11400000, guid: 466cb145d1a43e847abf05ed0b9e44be, type: 2}
+  - {fileID: 11400000, guid: 2060dba575981254d88cad7279d888c9, type: 2}
   - {fileID: 11400000, guid: 13f762f913b5ebb4bb7770cc7ddb7a45, type: 2}
   - {fileID: 11400000, guid: 2c72c3754f9367c48b9bedb3525e5778, type: 2}
-  - {fileID: 11400000, guid: 2060dba575981254d88cad7279d888c9, type: 2}
   - {fileID: 11400000, guid: b33543382846eff4f85587f851367354, type: 2}
   - {fileID: 11400000, guid: 1c650d128a13d4c4b8ff752af94f2bf6, type: 2}
