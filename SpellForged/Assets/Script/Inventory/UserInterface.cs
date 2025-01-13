@@ -105,7 +105,7 @@ public abstract class UserInterface : MonoBehaviour
         mouseData.interface_mouse_is_over = null;
     }
 
-    private void onSlotUpdate(InventorySlot _slot)
+    public void onSlotUpdate(InventorySlot _slot)
     {
         if (_slot.item.id >= 0)
         {

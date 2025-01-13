@@ -120,6 +120,10 @@ public class InventorySO : ScriptableObject
             FileStream file = File.Open(string.Concat(Application.persistentDataPath, save_path), FileMode.Open);
             JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
             file.Close();
+            for (int i = 0; i < get_slots.Length; i++)
+            {
+                get_slots[i].parent_interface.onSlotUpdate(get_slots[i]);
+            }
         }
     }
 
