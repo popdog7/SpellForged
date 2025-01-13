@@ -143,6 +143,8 @@ public class InventorySlot
     [System.NonSerialized] public slotUpdated on_after_update;
     [System.NonSerialized] public slotUpdated on_before_update;
 
+    public int spell_assingment_num = 0;
+
     public item item;
     public int amount;
 

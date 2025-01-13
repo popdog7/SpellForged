@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class BaseCastType : MonoBehaviour
 {
     [SerializeField] protected CastTypeDataSO cast_base_data;
-    protected ElementalTypeSO elemental_type;
+    protected ElementRuneSO elemental_type;
 
     protected float final_damage = 0;
     protected float damage_adjusted = 0;
@@ -26,7 +26,7 @@ public abstract class BaseCastType : MonoBehaviour
         }
     }
 
-    public void setupSpellStats(AttributeModifierSO modifier, ElementalTypeSO element_data)
+    public void setupSpellStats(ModifierRuneSO modifier, ElementRuneSO element_data)
     {
         damage_adjusted = convertToTwoDecimal(cast_base_data.damage * modifier.damage);
         spread_adjusted = convertToTwoDecimal(cast_base_data.spread * modifier.spread);

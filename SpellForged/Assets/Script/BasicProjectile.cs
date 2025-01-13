@@ -10,12 +10,14 @@ public class BasicProjectile : MonoBehaviour
     private float damage;
     private Color first_color, second_color;
 
-    private ElementalTypeSO element_data;
+    private ElementRuneSO element_data;
 
-    public void setupProjectile(float dmg, ElementalTypeSO data)
+    public void setupProjectile(float dmg, ElementRuneSO data)
     {
         damage = dmg;
         element_data = data;
+        Debug.Log("name: " + data.name);
+        Debug.Log("First Color: " + data.first_color);
         first_color = element_data.first_color;
         second_color = element_data.second_color;
         setParticleColor();
@@ -52,7 +54,7 @@ public class BasicProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(transform.rotation);
+        //Debug.Log(transform.rotation);
         if (collision.gameObject.CompareTag("Enemy"))
         {
             BaseHealth enemy_health = collision.gameObject.GetComponent<BaseHealth>();

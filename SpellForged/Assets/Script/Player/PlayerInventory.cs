@@ -6,6 +6,7 @@ public class PlayerInventory : MonoBehaviour
 {
     public InventorySO inventory;
     public InventorySO equipment;
+    [SerializeField] private PlayerCastSpell player_cast_spell;
 
     private void Start()
     {
@@ -36,12 +37,39 @@ public class PlayerInventory : MonoBehaviour
 
     public void onAfterSlotUpdate(InventorySlot slot)
     {
+        if (slot.ItemSO == null)
+        {
+            if(slot.allowed_items.Length > 0)
+            {
+                player_cast_spell.setDefault(slot.allowed_items[0], slot.spell_assingment_num);
+            }
+            return;
+        }
         switch (slot.parent_interface.inventory.type)
         {
             case InterfaceType.Inventory:
                 break;
             case InterfaceType.Equipment:
                 print(string.Concat("Placed :", slot.ItemSO, " on ", slot.parent_interface.inventory.type, ", Allowed Item: ", string.Join(", ", slot.allowed_items)));
+                determineItemSetter(slot.ItemSO.type, slot);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void determineItemSetter(ItemType type, InventorySlot slot)
+    {
+        switch (type)
+        {
+            case ItemType.cast_rune:
+                player_cast_spell.setCastType(((CastRuneSO)slot.ItemSO).cast_type, slot.spell_assingment_num);
+                break;
+            case ItemType.element_rune:
+                player_cast_spell.setElementalType((ElementRuneSO)slot.ItemSO, slot.spell_assingment_num);
+                break;
+            case ItemType.modifier_rune:
+                player_cast_spell.setAttributeModifier((ModifierRuneSO)slot.ItemSO, slot.spell_assingment_num);
                 break;
             default:
                 break;

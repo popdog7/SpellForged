@@ -10,7 +10,7 @@ public class CastRuneSO : ItemSO
     public float spread;
     public float cooldown;
     public float crit_chance;
-
+    public int cast_type;
     public void Awake()
     {
         type = ItemType.cast_rune;

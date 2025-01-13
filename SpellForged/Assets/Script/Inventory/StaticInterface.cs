@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 public class StaticInterface : UserInterface
 {
     public GameObject[] slots;
+    //kinda temporary
+    [SerializeField] private bool is_spell_inventory;
+    [SerializeField] private int num_of_spells = 0;
 
     public override void createInventoryUISlots()
     {
@@ -20,6 +23,11 @@ public class StaticInterface : UserInterface
             addEvent(obj, EventTriggerType.BeginDrag, delegate { onDragStart(obj); });
             addEvent(obj, EventTriggerType.EndDrag, delegate { onDragEnd(obj); });
             addEvent(obj, EventTriggerType.Drag, delegate { onDrag(obj); });
+
+            if(is_spell_inventory)
+            {
+                inventory.get_slots[i].spell_assingment_num = (i + 2) % num_of_spells;
+            }
 
             inventory.get_slots[i].slot = obj;
 

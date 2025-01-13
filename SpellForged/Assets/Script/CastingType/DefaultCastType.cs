@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class normalCastType : BaseCastType
+public class DefaultCastType : BaseCastType
 {
     public override void CommenceSpellCasting(Transform cast_location)
     {
