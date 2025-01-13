@@ -11,8 +11,9 @@ using Unity.VisualScripting;
 
 public abstract class UserInterface : MonoBehaviour
 {
+    [SerializeField] private GameObject menu;
     public InventorySO inventory;
-    protected Dictionary<GameObject, InventorySlot> slots_on_interface = new Dictionary<GameObject, InventorySlot>();
+    public Dictionary<GameObject, InventorySlot> slots_on_interface = new Dictionary<GameObject, InventorySlot>();
 
     private void Start()
     {
@@ -26,6 +27,8 @@ public abstract class UserInterface : MonoBehaviour
 
         addEvent(gameObject, EventTriggerType.PointerEnter, delegate { onEnterInterface(gameObject); });
         addEvent(gameObject, EventTriggerType.PointerExit, delegate { onExitInterface(gameObject); });
+
+        menu.SetActive(false);
     }
 
     public abstract void createInventoryUISlots();

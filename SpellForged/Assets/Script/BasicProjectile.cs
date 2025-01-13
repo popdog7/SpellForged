@@ -67,6 +67,8 @@ public class BasicProjectile : MonoBehaviour
             Debug.Log("Hit: " + collision.gameObject.name + ", Damage: " + damage);
         }
 
+        if (collision.gameObject.CompareTag("Player"))
+            return;
         Destroy(gameObject);
     }
 }
