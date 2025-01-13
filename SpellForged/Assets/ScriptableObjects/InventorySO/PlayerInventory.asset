@@ -14,148 +14,149 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   save_path: /inventory.save
   database: {fileID: 11400000, guid: 3c8ffd4f85604cc488346a142b1513a6, type: 2}
+  type: 0
   container:
-    items:
+    item_slots:
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
       amount: 0
     - allowed_items: 
-      parent_interface: {fileID: 0}
+      spell_assingment_num: 0
       item:
         name: 
         id: -1
