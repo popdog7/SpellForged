@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e72d90093f1c741878f57068e7aaf3, type: 3}
   m_Name: ArcaneElementRune
   m_EditorClassIdentifier: 
-  id: 1
-  inventory_icon: {fileID: 21300000, guid: 82b8204ec0cd68d45be58e5549d0da9a, type: 3}
+  inventory_icon: {fileID: 21300000, guid: e10497c731c95cf40ae455744f602de3, type: 3}
+  stackable: 0
   type: 1
   description: 
+  data:
+    name: 
+    id: 1
   first_color: {r: 0.68301034, g: 0.39288896, b: 0.764151, a: 1}
   second_color: {r: 0.5728884, g: 0.29783732, b: 0.6509434, a: 1}
   element_id: 0

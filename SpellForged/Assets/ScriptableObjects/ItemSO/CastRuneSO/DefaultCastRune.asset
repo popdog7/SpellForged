@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde5369ad13e49c4d91ee465217867fb, type: 3}
   m_Name: DefaultCastRune
   m_EditorClassIdentifier: 
-  inventory_icon: {fileID: 21300000, guid: 82b8204ec0cd68d45be58e5549d0da9a, type: 3}
+  inventory_icon: {fileID: 21300000, guid: b54b241e99b5b50459dd0dfcbe1a3385, type: 3}
   stackable: 0
   type: 0
   description: 
@@ -25,3 +25,4 @@ MonoBehaviour:
   spread: 0.05
   cooldown: 1
   crit_chance: 0.1
+  cast_type: 0
