@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde5369ad13e49c4d91ee465217867fb, type: 3}
   m_Name: BurstCastRune
   m_EditorClassIdentifier: 
-  inventory_icon: {fileID: 21300000, guid: 82b8204ec0cd68d45be58e5549d0da9a, type: 3}
+  inventory_icon: {fileID: 21300000, guid: b54b241e99b5b50459dd0dfcbe1a3385, type: 3}
   stackable: 0
   type: 0
   description: 
   data:
     name: 
-    id: 6
+    id: 5
   spell_prefab: {fileID: 0}
   damage: 1
   spread: 1

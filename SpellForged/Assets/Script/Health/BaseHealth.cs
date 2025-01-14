@@ -5,10 +5,10 @@ using UnityEngine;
 
 public abstract class BaseHealth : MonoBehaviour
 {
-    [SerializeField] private float max_health;
-    private float min_health = 0;
+    [SerializeField] protected float max_health;
+    protected float min_health = 0;
 
-    private float health;
+    protected float health;
     private float[] elemental_percentages = new float[4];
     private float[] elemental_resistances = new float[4];
 
@@ -17,8 +17,9 @@ public abstract class BaseHealth : MonoBehaviour
         health = max_health;
     }
 
-    public void damageHealth(float amount)
+    public virtual void damageHealth(float amount)
     {
+        Debug.Log("Hit");
         health = Mathf.Clamp(health - amount, min_health, max_health);
         if (health == min_health)
         {

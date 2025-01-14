@@ -82,7 +82,9 @@ public class PlayerInventory : MonoBehaviour
         equipment.clear();
     }
 
+
     //TEMP TILL I IMPLEMENT THE REAL EVENT FROM GAME INPUT
+    /*
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
@@ -96,6 +98,6 @@ public class PlayerInventory : MonoBehaviour
             inventory.Load();
             equipment.Load();
         }
-    }
+    }*/
 
 }

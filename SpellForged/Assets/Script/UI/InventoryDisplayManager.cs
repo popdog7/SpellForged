@@ -40,4 +40,9 @@ public class InventoryDisplayManager : MonoBehaviour
     {
         Cursor.visible = toggle;
     }
+
+    private void OnDestroy()
+    {
+        game_input.OnPause -= toggleInventory;
+    }
 }

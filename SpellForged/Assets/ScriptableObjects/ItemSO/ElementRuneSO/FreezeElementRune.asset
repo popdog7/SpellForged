@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36e72d90093f1c741878f57068e7aaf3, type: 3}
-  m_Name: ArcaneElementRune
+  m_Name: FreezeElementRune
   m_EditorClassIdentifier: 
   inventory_icon: {fileID: 21300000, guid: e10497c731c95cf40ae455744f602de3, type: 3}
   stackable: 0
@@ -18,7 +18,7 @@ MonoBehaviour:
   description: 
   data:
     name: 
-    id: 1
-  first_color: {r: 0.68301034, g: 0.39288896, b: 0.764151, a: 1}
-  second_color: {r: 0.5728884, g: 0.29783732, b: 0.6509434, a: 1}
-  element_id: 0
+    id: 7
+  first_color: {r: 0.25618547, g: 0.7527558, b: 0.9528302, a: 1}
+  second_color: {r: 0.0747597, g: 0.45823786, b: 0.754717, a: 1}
+  element_id: 3

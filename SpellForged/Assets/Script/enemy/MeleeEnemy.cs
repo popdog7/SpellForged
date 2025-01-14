@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MeleeEnemie : MonoBehaviour
+public class MeleeEnemy : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private NavMeshAgent agent;
 
-    public float follow_distance = 1;
+    public float follow_distance = 2;
     private float distance_to_player;
 
     private float attack_timer = 0;
@@ -36,6 +36,7 @@ public class MeleeEnemie : MonoBehaviour
 
     private void keepInRange()
     {
+        //Debug.Log("distance to player: " + distance_to_player);
         if (distance_to_player > follow_distance)
         {
             agent.SetDestination(player.transform.position);

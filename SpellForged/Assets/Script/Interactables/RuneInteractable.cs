@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class RuneInteractable : Interactable, ISerializationCallbackReceiver
     [SerializeField] private ItemSO item;
     [SerializeField] private ItemDatabaseSO databaseSO;
     [SerializeField] private InventorySO inventory;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     public int after_defaults = 3 ;
 
@@ -15,6 +17,8 @@ public class RuneInteractable : Interactable, ISerializationCallbackReceiver
     {
         if (item == null)
             getRandomRune();
+            updateSprite();
+
     }
 
     public void OnAfterDeserialize()
@@ -46,5 +50,10 @@ public class RuneInteractable : Interactable, ISerializationCallbackReceiver
     {
         int random_num = Random.Range(after_defaults, databaseSO.item_objecs.Length);
         item = databaseSO.item_objecs[random_num];
+    }
+
+    public void updateSprite()
+    {
+        spriteRenderer.sprite = item.inventory_icon;
     }
 }
